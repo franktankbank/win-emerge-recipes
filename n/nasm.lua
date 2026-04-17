@@ -1,4 +1,5 @@
-v = latest_version("https://github.com/netwide-assembler/nasm.git", "git", "^nasm-\\d+\\.\\d+(?:\\.\\d+)?(?:[a-z]+\\d*(?:-\\w+)?)?(?:rc\\d+)?$")
+u = "https://github.com/netwide-assembler/nasm.git"
+v = latest_version(u, "git", "^nasm-\\d+\\.\\d+(?:\\.\\d+)?(?:[a-z]+\\d*(?:-\\w+)?)?(?:rc\\d+)?$")
 
 package {
     name = "nasm",
@@ -7,7 +8,7 @@ package {
     build_mode = "wsl",
 
     source = {
-        url = "https://github.com/netwide-assembler/nasm/archive/refs/tags/" .. v .. ".tar.gz",
+        url = u,
     },
 
     dependencies = {

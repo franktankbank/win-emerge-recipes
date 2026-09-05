@@ -1,14 +1,11 @@
-u = "https://github.com/netwide-assembler/nasm.git"
-v = latest_version(u, "git", "^nasm-\\d+\\.\\d+(?:\\.\\d+)?(?:[a-z]+\\d*(?:-\\w+)?)?(?:rc\\d+)?$")
-
 package {
     name = "nasm",
-    version = v,
+    version = "nasm-3.02",
 
     build_mode = "wsl",
 
     source = {
-        url = u,
+        url = "https://github.com/netwide-assembler/nasm",
     },
 
     dependencies = {
@@ -16,10 +13,8 @@ package {
     },
 
     build = function(ctx)
-        vcpkg.clean()
-        vcpkg.foreach_dep(dependencies)
         ctx.run("./autogen.sh")
-        ctx.run("./configure --with-zlib=" .. vcpkg.prefix .. " --prefix=" .. ctx.prefix .. "/" .. name .. " --host=" .. ctx.target)
+        ctx.run("./configure --with-zlib=" .. ctx.prefix .. " --prefix=" .. ctx.prefix .. "/" .. name .. " --host=" .. ctx.target)
         ctx.run("make -j" .. ctx.jobs)
     end,
 
